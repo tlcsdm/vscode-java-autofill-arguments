@@ -157,16 +157,18 @@ export class ArgumentCompletionProvider implements vscode.CompletionItemProvider
     ): vscode.CompletionItem[] {
         const items: vscode.CompletionItem[] = [];
 
+        // Generate argument strings (used in multiple places)
+        const paramNames = parameters.map(p => p.name);
+        const allArgsString = paramNames.join(', ');
+        const snippetString = parameters.map((p, i) => `\${${i + 1}:${p.name}}`).join(', ');
+
         // Create a completion item for filling all arguments
         const allArgsItem = new vscode.CompletionItem(
             'Fill all arguments',
             vscode.CompletionItemKind.Snippet
         );
         
-        const allArgsString = parameters.map(p => p.name).join(', ');
-        allArgsItem.insertText = new vscode.SnippetString(
-            parameters.map((p, i) => `\${${i + 1}:${p.name}}`).join(', ')
-        );
+        allArgsItem.insertText = new vscode.SnippetString(snippetString);
         allArgsItem.detail = `Fill with: ${allArgsString}`;
         allArgsItem.documentation = new vscode.MarkdownString(
             `Fills all method arguments with parameter names:\n\n\`${allArgsString}\``
