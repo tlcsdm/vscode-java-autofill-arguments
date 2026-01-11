@@ -2,5 +2,8 @@
   "version": "stable",
   "files": "./out/test/**/*.test.js",
   "extensionDevelopmentPath": ".",
-  "extensionTestsPath": "./out/test"
+  "extensionTestsPath": "./out/test",
+  "launchArgs": [
+    "--user-data-dir=/tmp/vscode-test-data"
+  ]
 }
