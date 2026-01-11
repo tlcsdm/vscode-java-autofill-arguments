@@ -68,7 +68,6 @@ Configure the behavior through VS Code settings:
 
 ## Requirements
 
-- VS Code 1.108.0 or higher
 - For best results, install the [Language Support for Java(TM) by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java) extension
 
 ## Installation
@@ -115,7 +114,6 @@ npm run test
 ## Related Projects
 
 * [eclipse-autofill-arguments](https://github.com/tlcsdm/eclipse-autofill-arguments) - The Eclipse version of this plugin
-* [vscode-java-method-sorter](https://github.com/tlcsdm/vscode-java-method-sorter) - Sort methods in Java classes
 
 ## License
 
