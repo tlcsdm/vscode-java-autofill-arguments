@@ -22,6 +22,14 @@ export class ArgumentCompletionProvider implements vscode.CompletionItemProvider
         this.options = options;
     }
 
+    /**
+     * Update the options for this completion provider
+     * @param options The new options to use
+     */
+    updateOptions(options: AutofillOptions): void {
+        this.options = options;
+    }
+
     async provideCompletionItems(
         document: vscode.TextDocument,
         position: vscode.Position,

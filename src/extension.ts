@@ -117,7 +117,7 @@ export function activate(context: vscode.ExtensionContext): void {
         if (event.affectsConfiguration('tlcsdm.autofill')) {
             // Update completion provider options
             const newOptions = getAutofillOptions();
-            Object.assign(completionProvider, { options: newOptions });
+            completionProvider.updateOptions(newOptions);
         }
     });
 
