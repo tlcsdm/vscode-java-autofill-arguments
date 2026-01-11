@@ -1,0 +1,113 @@
+{
+  "name": "tlcsdm-java-autofill-arguments",
+  "displayName": "Tlcsdm Java Autofill Arguments",
+  "description": "Auto fill Java method call arguments based on parameter names",
+  "version": "1.0.0",
+  "publisher": "unknowIfGuestInDream",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tlcsdm/vscode-java-autofill-arguments"
+  },
+  "bugs": {
+    "url": "https://github.com/tlcsdm/vscode-java-autofill-arguments/issues"
+  },
+  "homepage": "https://github.com/tlcsdm/vscode-java-autofill-arguments#readme",
+  "engines": {
+    "vscode": "^1.108.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "java",
+    "autofill",
+    "arguments",
+    "parameters",
+    "code completion"
+  ],
+  "activationEvents": [
+    "onLanguage:java"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "tlcsdm.autofill.fillArguments",
+        "title": "Fill Method Arguments"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "tlcsdm.submenu",
+        "label": "tlcsdm"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "tlcsdm.submenu",
+          "group": "tlcsdm",
+          "when": "editorLangId == java"
+        }
+      ],
+      "tlcsdm.submenu": [
+        {
+          "command": "tlcsdm.autofill.fillArguments",
+          "when": "editorLangId == java",
+          "group": "autofill"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "tlcsdm.autofill.fillArguments",
+        "key": "ctrl+alt+o",
+        "mac": "cmd+alt+o",
+        "when": "editorLangId == java && editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Java Autofill Arguments",
+      "properties": {
+        "tlcsdm.autofill.enableCompletion": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable argument suggestions in code completion"
+        },
+        "tlcsdm.autofill.useParameterNames": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use parameter names as argument suggestions when available"
+        },
+        "tlcsdm.autofill.fallbackToTypeName": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use type names as fallback when parameter names are not available"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test --config ./.vscode-test.json"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.108.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.4.1",
+    "@vscode/vsce": "^3.2.2",
+    "eslint": "^9.17.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.2"
+  },
+  "license": "MIT"
+}
