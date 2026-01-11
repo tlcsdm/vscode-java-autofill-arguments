@@ -79,9 +79,10 @@ export class ArgumentFiller {
         let closeParenOffset = -1;
 
         // Start scanning from offset - 1 to correctly handle the case when cursor is
-        // between parentheses (e.g., "print(|)"). The offset points to the character
-        // at the cursor position, so we need to start before it to find the containing '('.
-        const scanStart = offset > 0 ? offset - 1 : 0;
+        // between parentheses (e.g., "new Inner().print(|)"). The offset points to the
+        // character at the cursor position, so we need to start before it to find the
+        // containing '('. This fixes issues with chained method calls like 'new Inner().print()'.
+        const scanStart = Math.min(Math.max(0, offset - 1), text.length - 1);
 
         // First, scan backward to find the context
         for (let i = scanStart; i >= 0; i--) {
