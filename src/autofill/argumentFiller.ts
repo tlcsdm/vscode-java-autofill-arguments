@@ -73,13 +73,19 @@ export class ArgumentFiller {
      * Find the method call context at the given offset
      */
     private findMethodCallContext(text: string, offset: number): MethodCallContext | null {
-        // Find the opening parenthesis before or at the cursor
+        // Find the opening parenthesis before the cursor
         let parenDepth = 0;
         let openParenOffset = -1;
         let closeParenOffset = -1;
 
+        // Start scanning from offset - 1 to correctly handle the case when cursor is
+        // between parentheses (e.g., "new Inner().print(|)"). The offset points to the
+        // character at the cursor position, so we need to start before it to find the
+        // containing '('. This fixes issues with chained method calls like 'new Inner().print()'.
+        const scanStart = Math.min(Math.max(0, offset - 1), text.length - 1);
+
         // First, scan backward to find the context
-        for (let i = offset; i >= 0; i--) {
+        for (let i = scanStart; i >= 0; i--) {
             const char = text[i];
             if (char === ')') {
                 parenDepth++;
